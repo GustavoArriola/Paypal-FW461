@@ -59,7 +59,7 @@ namespace Paypal_FW461.PaypalFlow
                      user_action: Configures a Continue or Pay Now checkout flow 
 
                     --PAY_NOW. If you set UserAction=PAY_NOW, the flow redirects the buyer to the PayPal payment page and displays a "Pay Now" button.
-                    When the buyer clicks Pay Now, call DoExpressCheckoutPayment to complete the payment without additional interaction from the buyer. 
+                    When the buyer clicks Pay Now, call DoExpressCheckoutPayment (in paypal portal) to complete the payment without additional interaction from the buyer. 
                     Choose this flow when you know the final payment amount when you initiate the checkout flow.
 
                     --CONTINUE. If you omit useraction, this default flow redirects the buyer to the PayPal payment page and displays the "Continue" button. 

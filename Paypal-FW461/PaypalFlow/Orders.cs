@@ -57,10 +57,17 @@ namespace Paypal_FW461.PaypalFlow
                     ReturnUrl = "https://localhost:44322/PaypalSuccess.aspx", //It goes to this page when the buyer authorizes the payment.
                     /*
                      user_action: Configures a Continue or Pay Now checkout flow 
-                    CONTINUE:  to redirect the customer to the merchant page without processing the payment.
-                    PAY_NOW: no redirect to merchant page.
+
+                    --PAY_NOW. If you set UserAction=PAY_NOW, the flow redirects the buyer to the PayPal payment page and displays a "Pay Now" button.
+                    When the buyer clicks Pay Now, call DoExpressCheckoutPayment to complete the payment without additional interaction from the buyer. 
+                    Choose this flow when you know the final payment amount when you initiate the checkout flow.
+
+                    --CONTINUE. If you omit useraction, this default flow redirects the buyer to the PayPal payment page and displays the "Continue" button. 
+                    When the buyer clicks Continue, the buyer can edit the payment amount. Choose this flow when you do not know the final payment amount when you initiate the checkout flow.
+
+                    Note: To maximize your sales conversion rate, PayPal recommends that all new integrations set useraction=PAY_NOW to leverage the Pay Now flow.
                      */
-                    UserAction = "CONTINUE", //PAY_NOW
+                    UserAction = "PAY_NOW", //CONTINUE
                     /*
                         The shipping preference:
                         Displays the shipping address to the customer. Enables the customer to choose an address on the PayPal site.
@@ -82,18 +89,19 @@ namespace Paypal_FW461.PaypalFlow
                         Description = "Sporting Goods",
                         CustomId = "CUST-HighFashions", //Place any information relevant to the trade here.
                         SoftDescriptor = "HighFashions",
+                        InvoiceId = $"INV-{DateTime.Now.Ticks.ToString()}", //Pass the invoice ID. It needs to be unique. It will help to identify the transaction in PayPal side
 
                         #region Total amount details
                         AmountWithBreakdown = new AmountWithBreakdown
                         {
                             CurrencyCode = "USD", // Currency codes (ISO 4217)
-                            Value = "220.00",                            
+                            Value = "155.00",                            
                             AmountBreakdown = new AmountBreakdown
                             {
                                 ItemTotal = new Money
                                 {
                                     CurrencyCode = "USD",
-                                    Value = "180.00"
+                                    Value = "120.00"
                                 },
                                 Shipping = new Money
                                 {
@@ -108,7 +116,7 @@ namespace Paypal_FW461.PaypalFlow
                                 TaxTotal = new Money
                                 {
                                     CurrencyCode = "USD",
-                                    Value = "20.00"
+                                    Value = "15.00"
                                 },
                                 ShippingDiscount = new Money
                                 {
@@ -130,15 +138,20 @@ namespace Paypal_FW461.PaypalFlow
                                 UnitAmount = new Money
                                 {
                                     CurrencyCode = "USD",
-                                    Value = "90.00"
+                                    Value = "30.00"
                                 },
                                 Tax = new Money
                                 {
                                     CurrencyCode = "USD",
-                                    Value = "10.00"
+                                    Value = "5.00"
                                 },
                                 Quantity = "1",
-                                Category = "PHYSICAL_GOODS"
+                                /*
+                                category 
+                                PHYSICAL_GOODS: Tangible item
+                                DIGITAL_GOODS: Digital item.
+                                 */
+                                Category = "PHYSICAL_GOODS",
                             },
                             new Item
                             {

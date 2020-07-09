@@ -22,6 +22,7 @@ namespace Paypal_FW461
                 PaypalFlow.Orders orders = new PaypalFlow.Orders();
                 Task.Run(async () =>
                 {
+                    //Use the Capture Order API to execute the payment...
                     await orders.CaptureOrder(orderId);
                 }).Wait();
             }            

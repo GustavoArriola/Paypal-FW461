@@ -89,7 +89,7 @@ namespace Paypal_FW461.PaypalFlow
                         Description = "Sporting Goods",
                         CustomId = "CUST-HighFashions", //Place any information relevant to the trade here.
                         SoftDescriptor = "HighFashions",
-                        InvoiceId = $"INV-{DateTime.Now.Ticks.ToString()}", //Pass the invoice ID. It needs to be unique. It will help to identify the transaction in PayPal side
+                        InvoiceId = $"INV-{DateTime.Now.Ticks}", //Pass the invoice ID. It needs to be unique. It will help to identify the transaction in PayPal side
 
                         #region Total amount details
                         AmountWithBreakdown = new AmountWithBreakdown

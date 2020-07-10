@@ -18,10 +18,10 @@ namespace Paypal_FW461
                 String orderId = ConfigurationManager.AppSettings["PaypalOrderId"];
                 //The buyer's ID, you can use it to associate the order's id with the buyer's id.
                 String payerID = Request.QueryString["PayerID"];
-                //this.SaveInConfig("PaypalPayerId", payerID);
-                PaypalFlow.Orders orders = new PaypalFlow.Orders();
+                //this.SaveInDatabase("PaypalPayerId", payerID);                
                 Task.Run(async () =>
                 {
+                    PaypalFlow.Orders orders = new PaypalFlow.Orders();
                     //Use the Capture Order API to execute the payment...
                     await orders.CaptureOrder(orderId);
                 }).Wait();
